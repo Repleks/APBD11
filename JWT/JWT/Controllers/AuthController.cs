@@ -18,8 +18,7 @@ namespace JWT.Controllers
         private readonly UserManager<IdentityUser> _userManager;
         private readonly JWTDbContext _context;
 
-        public AuthController(IConfiguration config, UserManager<IdentityUser> userManager,
-            JWTDbContext context)
+        public AuthController(IConfiguration config, UserManager<IdentityUser> userManager, JWTDbContext context)
         {
             _config = config;
             _userManager = userManager;
@@ -112,7 +111,7 @@ namespace JWT.Controllers
 
             var newRefreshToken = GenerateRefreshToken();
             refreshToken.Token = newRefreshToken;
-            refreshToken.ExpiryDate = DateTime.UtcNow.AddDays(7);
+            refreshToken.ExpiryDate = DateTime.UtcNow.AddDays(1);
             _context.RefreshTokens.Update(refreshToken);
             await _context.SaveChangesAsync();
 
